@@ -20,7 +20,7 @@ class StorageService:
         """
         Uploads file to S3
         :param file: File to be uploaded
-        :param path: S3 path in whichi file will be stored
+        :param path: S3 path in which file will be stored
         :param addinfo: [Optional] Key-value style tags to the document upload
         :param username: Logged-in username
         :return: S3 path that should be used to retrieve document
