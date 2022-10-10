@@ -22,7 +22,7 @@ This project is a minimal HTTP based API that allows the users to do the followi
 
 ## Security
 
-This api uses basic auth.
+This api uses basic auth. Sample login credentials: {"username": "jack", "password": "password"}.
 
 ## Endpoints
 
