@@ -2,6 +2,8 @@ version: "3.9"
 services:
   src:
     build: .
+    env_file:
+      - ./src/resources/.env
     command: uvicorn src.main:app --host 0.0.0.0 --reload --port 8000
     ports:
       - "8000:8000"
