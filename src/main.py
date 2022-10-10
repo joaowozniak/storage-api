@@ -12,6 +12,11 @@ service = StorageService()
 security = SecurityService()
 
 
+@app.get("/ping")
+async def ping():
+    return {"/ping": "pong"}
+
+
 @app.post(
     "/upload",
     status_code=status.HTTP_201_CREATED,
