@@ -21,11 +21,10 @@ security = SecurityService()
     response_description="File upload OK",
 )
 async def upload_file(
-    file: UploadFile,
-    path: str = Header(default=None),
-    addinfo: List[str] = Header(default=None),
-    username: str = Depends(security.validate_user),
-):
+        file: UploadFile,
+        path: str = Header(default=None),
+        addinfo: List[str] = Header(default=None),
+        username: str = Depends(security.validate_user)):
     return service.upload_file(file, path, addinfo, username)
 
 

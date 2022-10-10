@@ -8,12 +8,23 @@ from src.services.path_service import PathService
 
 
 class StorageService:
+    """
+    Handles basic functions to communicate with S3: upload, download, delete
+    """
     s3_config = S3Config()
     path_service = PathService()
 
     def upload_file(
             self, file: UploadFile, path: str, addinfo: List[str], username: str
-    ):
+    ) -> JSONResponse:
+        """
+        Uploads file to S3
+        :param file: File to be uploaded
+        :param path: S3 path in whichi file will be stored
+        :param addinfo: [Optional] Key-value style tags to the document upload
+        :param username: Logged-in username
+        :return: S3 path that should be used to retrieve document
+        """
 
         s3_client = self.s3_config.get_base_client()
 
@@ -53,6 +64,12 @@ class StorageService:
         return None
 
     def download_file(self, path: str, username: str):
+        """
+        Generates an S3 presigned url that can be used to download file
+        :param path: S3 path including filename in which file is stored
+        :param username: Logged-in username
+        :return: S3 Presigned url of file and additional information saved as tags
+        """
 
         s3_client = self.s3_config.get_base_client()
 
@@ -80,7 +97,13 @@ class StorageService:
 
         return {"Download your file here": presigned_url, "Tags": tags["TagSet"]}
 
-    def delete_file(self, path: str, username: str):
+    def delete_file(self, path: str, username: str) -> JSONResponse:
+        """
+        Deletes previously uploaded file from S3 storage
+        :param path: S3 path of file to be deleted
+        :param username: Logged-in username
+        :return: Path of deleted file
+        """
         s3_client = self.s3_config.get_base_client()
 
         logging.log(level=20, msg=f"Deleting file from path: {path}")
@@ -104,7 +127,7 @@ class StorageService:
             )
 
     @staticmethod
-    def __check_if_exists(s3_client, prefix):
+    def __check_if_exists(s3_client, prefix) -> list:
 
         obj_list = s3_client.list_objects(Bucket=S3Config.AWS_S3_BUCKET, Prefix=prefix)
 
