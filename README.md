@@ -1,6 +1,6 @@
-# Storage-api
+# Storage-API
 
-Storage-api allows users to store files in the cloud through a simple-to-use API.
+Storage-API allows users to store files in the cloud through a simple-to-use API.
 
 ## Getting started
 
